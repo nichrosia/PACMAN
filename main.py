@@ -60,7 +60,7 @@ def main():
 
         for index, junction in enumerate(junctions):
             pygame.draw.circle(screen, (100, 100, 255), junction, 20, 0)
-            junctions_directions[str(index)] = []
+            junctions_directions[index] = []
 
         for wall_dots_surrounding_junction in wall_dots:
             for walldot in wall_dots_surrounding_junction:
@@ -69,12 +69,12 @@ def main():
         for start_junction, end_junction in rails:
             if junctions[start_junction].x - junctions[end_junction].x == 0:
                 rail_directions.append('VERTICAL')
-                junctions_directions[str(start_junction)].append('DOWN')
-                junctions_directions[str(end_junction)].append('UP')
+                junctions_directions[start_junction].append('DOWN')
+                junctions_directions[end_junction].append('UP')
             else:
                 rail_directions.append('HORIZONTAL')
-                junctions_directions[str(start_junction)].append('RIGHT')
-                junctions_directions[str(end_junction)].append('LEFT')
+                junctions_directions[start_junction].append('RIGHT')
+                junctions_directions[end_junction].append('LEFT')
 
         for rail, rail_direction in zip(rails, rail_directions):
             if rail_direction == 'HORIZONTAL':
@@ -89,16 +89,16 @@ def main():
                 pygame.draw.line(screen, black, start, end, 5)
 
         for iterator, junction in enumerate(junctions):
-            if 'DOWN' not in junctions_directions[str(iterator)]:
+            if 'DOWN' not in junctions_directions[iterator]:
                 start, end = wall_dots[iterator][2], wall_dots[iterator][3]
                 pygame.draw.line(screen, black, start, end, 5)
-            if 'UP' not in junctions_directions[str(iterator)]:
+            if 'UP' not in junctions_directions[iterator]:
                 start, end = wall_dots[iterator][0], wall_dots[iterator][1]
                 pygame.draw.line(screen, black, start, end, 5)
-            if 'LEFT' not in junctions_directions[str(iterator)]:
+            if 'LEFT' not in junctions_directions[iterator]:
                 start, end = wall_dots[iterator][0], wall_dots[iterator][2]
                 pygame.draw.line(screen, black, start, end, 5)
-            if 'RIGHT' not in junctions_directions[str(iterator)]:
+            if 'RIGHT' not in junctions_directions[iterator]:
                 start, end = wall_dots[iterator][1], wall_dots[iterator][3]
                 pygame.draw.line(screen, black, start, end, 5)
 
