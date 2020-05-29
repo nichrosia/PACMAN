@@ -65,16 +65,16 @@ def main():
         for wall_dots_surrounding_junction in wall_dots:
             for walldot in wall_dots_surrounding_junction:
                 pygame.draw.circle(screen, black, walldot, 2, 0)
-        for rail in rails:
-            if junctions[rail[0]][0] - junctions[rail[1]][0] == 0:
 
+        for start_junction, end_junction in rails:
+            if junctions[start_junction][0] - junctions[end_junction][0] == 0:
                 rail_directions.append('VERTICAL')
-                junctions_directions[str(rail[0])].append('DOWN')
-                junctions_directions[str(rail[1])].append('UP')
+                junctions_directions[str(start_junction)].append('DOWN')
+                junctions_directions[str(end_junction)].append('UP')
             else:
                 rail_directions.append('HORIZONTAL')
-                junctions_directions[str(rail[0])].append('RIGHT')
-                junctions_directions[str(rail[1])].append('LEFT')
+                junctions_directions[str(start_junction)].append('RIGHT')
+                junctions_directions[str(end_junction)].append('LEFT')
 
         for rail, rail_direction in zip(rails, rail_directions):
             if rail_direction == 'HORIZONTAL':
