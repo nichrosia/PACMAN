@@ -67,7 +67,7 @@ def main():
                 pygame.draw.circle(screen, black, walldot, 2, 0)
 
         for start_junction, end_junction in rails:
-            if junctions[start_junction][0] - junctions[end_junction][0] == 0:
+            if junctions[start_junction].x - junctions[end_junction].x == 0:
                 rail_directions.append('VERTICAL')
                 junctions_directions[str(start_junction)].append('DOWN')
                 junctions_directions[str(end_junction)].append('UP')
