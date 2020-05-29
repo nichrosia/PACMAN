@@ -49,7 +49,6 @@ def main():
     wall_dots = get_wall_dots(junctions)
     rail_directions = []
     junctions_directions = {}
-    iterator = 0
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -57,11 +56,9 @@ def main():
                 quit()
         for start, end in rails:
             pygame.draw.line(screen, (0, 0, 255), junctions[start], junctions[end], 5)
-        for junction in junctions:
+        for index, junction in enumerate(junctions):
             pygame.draw.circle(screen, (100, 100, 255), junction, 20, 0)
-            junctions_directions[str(iterator)] = []
-            iterator += 1
-        iterator = 0
+            junctions_directions[str(index)] = []
         for wall_dots_surrounding_junction in wall_dots:
             for walldot in wall_dots_surrounding_junction:
                 pygame.draw.circle(screen, black, walldot, 2, 0)
@@ -85,7 +82,8 @@ def main():
                 pygame.draw.line(screen, black, start, end, 5)
                 start, end = wall_dots[rail[0]][3], wall_dots[rail[1]][1]
                 pygame.draw.line(screen, black, start, end, 5)
-        for junction, iterator in zip(junctions, range(len(junctions))):
+
+        for iterator, junction in enumerate(junctions):
             if 'DOWN' not in junctions_directions[str(iterator)]:
                 start, end = wall_dots[iterator][2], wall_dots[iterator][3]
                 pygame.draw.line(screen, black, start, end, 5)
@@ -98,7 +96,6 @@ def main():
             if 'RIGHT' not in junctions_directions[str(iterator)]:
                 start, end = wall_dots[iterator][1], wall_dots[iterator][3]
                 pygame.draw.line(screen, black, start, end, 5)
-        iterator = 0
         pygame.display.flip()
 
 
