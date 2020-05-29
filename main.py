@@ -1,4 +1,9 @@
+from collections import namedtuple
+
 import pygame
+
+
+Coordinate = namedtuple('Coordinate', ['x', 'y'])
 
 
 TUNNEL_SIZE = 40
@@ -13,7 +18,7 @@ def create_map(file):
                 junction = []
                 for item in line[1:].split(', '):
                     junction.append(int(item))
-                junctions.append(junction)
+                junctions.append(Coordinate(*junction))
             elif line[0] == 'R':
                 rail = []
                 for item in line[1:].split(', '):
@@ -26,10 +31,10 @@ def get_wall_dots(junctions):
     walldots = []
     for junction in junctions:
         walldots.append([
-            [junction[0] - TUNNEL_SIZE, junction[1] - TUNNEL_SIZE],
-            [junction[0] + TUNNEL_SIZE, junction[1] - TUNNEL_SIZE],
-            [junction[0] - TUNNEL_SIZE, junction[1] + TUNNEL_SIZE],
-            [junction[0] + TUNNEL_SIZE, junction[1] + TUNNEL_SIZE],
+            Coordinate(junction[0] - TUNNEL_SIZE, junction[1] - TUNNEL_SIZE),
+            Coordinate(junction[0] + TUNNEL_SIZE, junction[1] - TUNNEL_SIZE),
+            Coordinate(junction[0] - TUNNEL_SIZE, junction[1] + TUNNEL_SIZE),
+            Coordinate(junction[0] + TUNNEL_SIZE, junction[1] + TUNNEL_SIZE),
         ])
     return walldots
 
