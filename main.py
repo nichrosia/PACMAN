@@ -1,6 +1,9 @@
 import pygame
 
 
+TUNNEL_SIZE = 40
+
+
 def create_map(file):
     junctions = []
     rails = []
@@ -22,7 +25,12 @@ def create_map(file):
 def get_wall_dots(junctions):
     walldots = []
     for junction in junctions:
-        walldots.append([[junction[0] - 40, junction[1] - 40], [junction[0] + 40, junction[1] - 40], [junction[0] - 40, junction[1] + 40], [junction[0] + 40, junction[1] + 40]])
+        walldots.append([
+            [junction[0] - TUNNEL_SIZE, junction[1] - TUNNEL_SIZE],
+            [junction[0] + TUNNEL_SIZE, junction[1] - TUNNEL_SIZE],
+            [junction[0] - TUNNEL_SIZE, junction[1] + TUNNEL_SIZE],
+            [junction[0] + TUNNEL_SIZE, junction[1] + TUNNEL_SIZE],
+        ])
     return walldots
 
 
